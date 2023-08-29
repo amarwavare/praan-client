@@ -1,0 +1,10 @@
+.home_container__layout {
+    display: flex;
+    flex-direction: column;
+    margin: 10%;
+}
+.home_container__nextIcon {
+    margin-left: 10px;
+    align-self: center;
+    border-radius: 100%;
+}
