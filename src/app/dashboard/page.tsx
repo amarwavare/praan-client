@@ -120,7 +120,7 @@ function Dashboard() {
       {
         label: 'Particle 25',
         data: newArr?.map((val:any) => val.p25),
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: 'rgba(150, 130, 170, 0.5)',
       },
     ],
   };

@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useEffect } from "react";
-import { Group, Text, useMantineTheme, rem } from "@mantine/core";
+import { Group, Text, Button, useMantineTheme, rem } from "@mantine/core";
 import {
   IconUpload,
   IconPhoto,
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fileUploadingAction,
   praanReducer,
+  processFileAction,
   uploadFileAction,
   uploadFileResAction,
 } from "../store/reducer";
@@ -25,6 +26,10 @@ export default function Upload(props: Partial<DropzoneProps>) {
   const isUploading: boolean = useSelector(
     (state: any) => state[praanReducer].isUploading
   );
+  const isProcessing: boolean = useSelector(
+    (state: any) => state[praanReducer].isProcessing
+  );
+  console.log('isFileUploaded',isFileUploaded)
   useEffect(() => {
     return () => {
       dispatch(uploadFileResAction({isFileUploaded: false}));
@@ -108,6 +113,10 @@ export default function Upload(props: Partial<DropzoneProps>) {
           </Group>
         </Dropzone>
       )}
+      <br /><br /><br />
+      
+      {isFileUploaded && <Button loading={isProcessing} onClick={() => dispatch(processFileAction({fileId: Number(sessionStorage.getItem('fileId'))}))}>{isProcessing ? 'Please wait file is processing': 'Process File'}</Button>}
+      <br />
     </Fragment>
   );
 }

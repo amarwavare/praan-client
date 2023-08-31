@@ -144,7 +144,7 @@ export default function UploadLayout({
             </Navbar.Section>
           </Navbar>
         </nav>
-        <div style={{width: '100%', display: 'flex',justifyContent: 'center', marginTop: '5%'}}>
+        <div style={{width: '100%', display: 'flex', flexDirection:'column', justifyContent: 'center', marginTop: '5%'}}>
           {children}
         </div>
       </section>

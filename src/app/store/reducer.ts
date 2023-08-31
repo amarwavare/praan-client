@@ -5,6 +5,8 @@ export const praanReducer: string = "praanReducer";
 const initialState = {
   isFileUploaded: false,
   isUploading: false,
+  isFileProcessed: false,
+  isProcessing: false,
   processedFilesMetadata: null,
   fileVisualsData: null,
 };
@@ -18,7 +20,7 @@ export const praanSlice = createSlice({
       state.isFileUploaded = action.payload.isFileUploaded;
     },
     fileUploadingAction: (state, action) => {
-      state.isFileUploaded = action.payload.isUploading;
+      state.isUploading = action.payload.isUploading;
     },
     fetchProcessedFilesMetadataAction: () => {},
     processedFilesMetadataResAction: (state,action) => {
@@ -27,17 +29,15 @@ export const praanSlice = createSlice({
     fetchFileVisualDataAction: (state,action) => {},
     fileVisualDataResAction: (state,action) => {
         state.fileVisualsData = action.payload.fileVisualsData;
+    },
+    processFileAction: (state, action) => {},
+    fileProcessResAction: (state,action) => {
+        state.isFileProcessed = action.payload.isFileProcessed
+    },
+    processLoadingAction: (state,action) => {
+        state.isProcessing = action.payload.isProcessing;
     }
   },
-
-  // extraReducers: {
-  //     [HYDRATE]: (state, action) => {
-  //         return {
-  //           ...state,
-  //           ...action.payload.auth,
-  //         };
-  //       },
-  // }
 });
 
 export const {
@@ -46,4 +46,6 @@ export const {
   fileUploadingAction,
   fetchProcessedFilesMetadataAction,
   fetchFileVisualDataAction,
+  processFileAction,
+  processLoadingAction,
 } = praanSlice.actions;
