@@ -12,6 +12,8 @@ import { IconDashboard, IconCloudUpload, IconLogout } from "@tabler/icons-react"
 import Image from "next/image";
 import PRAAN_LOGO from "../../branding/praanwt.svg";
 import { useRouter } from "next/navigation";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -114,6 +116,7 @@ export default function DashboardLayout({
     </a>
   ));
   return (
+    <Provider store={store}>
     <section style={{ display: "flex" }}>
       {/* Include shared UI here e.g. a header or sidebar */}
       <nav>
@@ -135,7 +138,7 @@ export default function DashboardLayout({
                 router.push('/');
               }}
             >
-              <IconLogout className={classes.linkIcon} stroke={1.5} />
+              <IconLogout className={classes.linkIcon} stroke={1.5} onClick={() => router.push('/')} />
               <span>Logout</span>
             </a>
           </Navbar.Section>
@@ -143,5 +146,6 @@ export default function DashboardLayout({
       </nav>
       {children}
     </section>
+    </Provider>
   );
 }

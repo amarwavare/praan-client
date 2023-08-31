@@ -12,6 +12,8 @@ import { IconDashboard, IconCloudUpload, IconLogout } from "@tabler/icons-react"
 import Image from "next/image";
 import PRAAN_LOGO from "../../branding/praanwt.svg";
 import { useRouter } from "next/navigation";
+import { Provider } from 'react-redux';
+import { store } from "../store";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -114,36 +116,38 @@ export default function UploadLayout({
     </a>
   ));
   return (
-    <section style={{ display: "flex" }}>
-      {/* Include shared UI here e.g. a header or sidebar */}
-      <nav>
-        <Navbar height={700} width={{ sm: 300 }} p="md">
-          <Navbar.Section grow>
-            <Group className={classes.header} position="apart">
-              <Image src={PRAAN_LOGO} width={140} height={80} alt="Praan" />
-              <Code sx={{ fontWeight: 700 }}>v1.0</Code>
-            </Group>
-            {links}
-          </Navbar.Section>
+    <Provider store={store}>
+      <section style={{ display: "flex" }}>
+        {/* Include shared UI here e.g. a header or sidebar */}
+        <nav>
+          <Navbar height={700} width={{ sm: 300 }} p="md">
+            <Navbar.Section grow>
+              <Group className={classes.header} position="apart">
+                <Image src={PRAAN_LOGO} width={140} height={80} alt="Praan" />
+                <Code sx={{ fontWeight: 700 }}>v1.0</Code>
+              </Group>
+              {links}
+            </Navbar.Section>
 
-          <Navbar.Section className={classes.footer}>
-            <a
-              href="#"
-              className={classes.link}
-              onClick={(event) => {
-                event.preventDefault();
-                router.push('/')
-              }}
-            >
-              <IconLogout className={classes.linkIcon} stroke={1.5} />
-              <span>Logout</span>
-            </a>
-          </Navbar.Section>
-        </Navbar>
-      </nav>
-      <div style={{width: '100%', display: 'flex',justifyContent: 'center', marginTop: '5%'}}>
-        {children}
-      </div>
-    </section>
+            <Navbar.Section className={classes.footer}>
+              <a
+                href="#"
+                className={classes.link}
+                onClick={(event) => {
+                  event.preventDefault();
+                  router.push('/')
+                }}
+              >
+                <IconLogout className={classes.linkIcon} stroke={1.5} onClick={() => router.push('/')} />
+                <span>Logout</span>
+              </a>
+            </Navbar.Section>
+          </Navbar>
+        </nav>
+        <div style={{width: '100%', display: 'flex',justifyContent: 'center', marginTop: '5%'}}>
+          {children}
+        </div>
+      </section>
+    </Provider>
   );
 }
